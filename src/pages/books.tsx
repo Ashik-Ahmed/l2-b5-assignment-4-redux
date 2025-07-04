@@ -1,7 +1,7 @@
 import { AddBookDialog } from '@/components/module/Book/AddBookDialog';
+import { DeleteBookDialog } from '@/components/module/Book/DeleteBookDialog';
 import { EditBookDialog } from '@/components/module/Book/EditBookDialog';
 import { useGetBooksQuery } from '@/redux/api/baseApi';
-import { useState } from 'react';
 import type { IBook } from 'types';
 // import { selectBooks } from '@/redux/features/book/bookSlice';
 // import { useAppSelector } from '@/redux/hook';
@@ -15,6 +15,9 @@ const Books = () => {
 
     // const books = useAppSelector(selectBooks);
     // console.log(books);
+
+    if (isLoading) return <div className='text-4xl text-[#6b4f1d] w-full mt-10 flex justify-center items-center'>Loading Books...</div>;
+    if (isError) return <div>Error</div>;
 
     return (
         <div className='m-4'>
@@ -57,12 +60,13 @@ const Books = () => {
                                     Edit
                                 </button> */}
                                 <EditBookDialog book={book} />
-                                <button
+                                {/* <button
                                     className="px-3 py-1 text-sm rounded-md bg-red-100 text-red-700 hover:bg-red-200 transition"
                                     onClick={() => handleDelete(book.isbn)}
                                 >
                                     Delete
-                                </button>
+                                </button> */}
+                                <DeleteBookDialog book={book} />
                             </div>
                         </div>
                     ))

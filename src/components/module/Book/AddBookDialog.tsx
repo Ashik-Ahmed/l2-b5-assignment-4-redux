@@ -43,7 +43,7 @@ export function AddBookDialog() {
             })
             .catch((error) => {
                 toast.error("Failed to add book", {
-                    description: error?.data?.message
+                    description: error?.data?.error?.message
                 })
             });
         setIsOpen(false);

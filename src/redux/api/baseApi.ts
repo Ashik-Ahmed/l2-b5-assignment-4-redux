@@ -1,6 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { addBook } from '../features/book/bookSlice';
-import type { IBook } from 'types';
 
 export const baseApi = createApi({
     reducerPath: 'baseApi',
@@ -27,7 +25,14 @@ export const baseApi = createApi({
             }),
             invalidatesTags: ['Book'],
         }),
+        deleteBook: builder.mutation({
+            query: ({ bookId }) => ({
+                url: `/books/${bookId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Book'],
+        })
     })
 })
 
-export const { useAddBookMutation, useGetBooksQuery, useEditBookMutation } = baseApi
+export const { useAddBookMutation, useGetBooksQuery, useEditBookMutation, useDeleteBookMutation } = baseApi

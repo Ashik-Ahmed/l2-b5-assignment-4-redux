@@ -62,7 +62,7 @@ export function EditBookDialog({ book }: { book: IBook }) {
             })
             .catch((error) => {
                 toast.error("Failed to edit book", {
-                    description: error?.data?.message
+                    description: error?.data?.error?.message
                 })
             });
         setIsOpen(false);
@@ -72,7 +72,7 @@ export function EditBookDialog({ book }: { book: IBook }) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className="bg-[#a67c52] text-white hover:bg-[#8f6b4a] transition-colors duration-200">
+                <Button className="bg-sky-500 text-white hover:bg-sky-700 transition-colors duration-200">
                     <Pencil /> Edit</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
