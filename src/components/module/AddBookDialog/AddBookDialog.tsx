@@ -17,15 +17,16 @@ import { Textarea } from "@/components/ui/textarea"
 import { addBook } from "@/redux/features/book/bookSlice"
 import { useAppDispatch } from "@/redux/hook"
 import { Plus } from "lucide-react"
-import { useForm } from "react-hook-form"
+import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
+import type { IBook } from "types"
 
 export function AddBookDialog() {
 
     const dispatch = useAppDispatch();
 
-    const handleAddBook = (data) => {
+    const handleAddBook: SubmitHandler<FieldValues> = (data) => {
         console.log(data);
-        dispatch(addBook(data));
+        dispatch(addBook(data as IBook));
     }
 
     const form = useForm();
