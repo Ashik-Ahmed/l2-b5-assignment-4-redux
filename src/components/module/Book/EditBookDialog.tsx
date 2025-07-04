@@ -14,14 +14,17 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { useAppDispatch } from "@/redux/hook"
+import { useEditBookMutation } from "@/redux/api/baseApi"
 import { Pencil } from "lucide-react"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
+import { toast } from "sonner"
 import type { IBook } from "types"
 
 export function EditBookDialog({ book }: { book: IBook }) {
-    const dispatch = useAppDispatch();
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [editBook, { data, isLoading, isError }] = useEditBookMutation();
 
     const form = useForm({
         defaultValues: {
@@ -46,13 +49,28 @@ export function EditBookDialog({ book }: { book: IBook }) {
         });
     }, [book, form]);
 
-    const handleEditBook: SubmitHandler<FieldValues> = (data) => {
-        console.log(data);
+    const handleEditBook: SubmitHandler<FieldValues> = (bookData) => {
+        // console.log(bookData);
         // dispatch(editBook(data as IBook));
+        editBook({ bookId: book?._id, bookData })
+            .unwrap()
+            .then((response) => {
+                if (response?.success) {
+                    // console.log('Book edited successfully:', response);
+                    toast.success('Book edited successfully!');
+                }
+            })
+            .catch((error) => {
+                toast.error("Failed to edit book", {
+                    description: error?.data?.message
+                })
+            });
+        setIsOpen(false);
+        form.reset();
     }
 
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button className="bg-[#a67c52] text-white hover:bg-[#8f6b4a] transition-colors duration-200">
                     <Pencil /> Edit</Button>
@@ -94,21 +112,6 @@ export function EditBookDialog({ book }: { book: IBook }) {
                                 </FormItem>
                             )}
                         />
-                        {/* <FormField
-                            control={form.control}
-                            name="genre"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel />
-                                    <FormControl>
-                                        <div className="grid w-full max-w-sm items-center gap-3">
-                                            <Label htmlFor="copies">Genre</Label>
-                                            <Input {...field} value={field.value || ""} />
-                                        </div>
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        /> */}
                         <FormField
                             control={form.control}
                             name="genre"

@@ -15,8 +15,8 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { useAddBookMutation } from "@/redux/api/baseApi"
-import { useAppDispatch } from "@/redux/hook"
 import { Plus } from "lucide-react"
+import { useState } from "react"
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
 import { toast } from "sonner"
 import type { IBook } from "types"
@@ -24,7 +24,7 @@ import type { IBook } from "types"
 export function AddBookDialog() {
 
     const form = useForm();
-    const dispatch = useAppDispatch();
+    const [isOpen, setIsOpen] = useState(false);
 
     const [addBook, { data, isLoading, isError }] = useAddBookMutation();
 
@@ -34,13 +34,19 @@ export function AddBookDialog() {
         addBook(data as IBook)
             .unwrap()
             .then((response) => {
-                console.log('Book added successfully:', response);
-                toast.success('Book added successfully!');
+                if (response?.success) {
+                    // console.log('Book added successfully:', response);
+                    toast.success('Book added successfully!');
+                    form.reset();
+                }
                 // dispatch(addBook(data as IBook));
             })
             .catch((error) => {
-                console.error('Failed to add book:', error);
+                toast.error("Failed to add book", {
+                    description: error?.data?.message
+                })
             });
+        setIsOpen(false);
     }
 
     if (isLoading) {
@@ -50,7 +56,7 @@ export function AddBookDialog() {
 
 
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button className="bg-[#a67c52] text-white hover:bg-[#8f6b4a] transition-colors duration-200">
                     <Plus />  Add Book</Button>
