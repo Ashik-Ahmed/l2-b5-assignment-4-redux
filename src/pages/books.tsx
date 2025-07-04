@@ -1,3 +1,4 @@
+import { AddBookDialog } from '@/components/module/AddBookDialog/AddBookDialog';
 import { selectBooks } from '@/redux/features/book/bookSlice';
 import { useAppSelector } from '@/redux/hook';
 
@@ -9,6 +10,9 @@ const Books = () => {
 
     return (
         <div className='m-4'>
+            <div className='flex justify-end items-center mb-2'>
+                <AddBookDialog />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {
                     books.map((book) => (
