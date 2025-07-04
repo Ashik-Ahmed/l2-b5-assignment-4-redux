@@ -14,22 +14,40 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { addBook } from "@/redux/features/book/bookSlice"
+import { useAddBookMutation } from "@/redux/api/baseApi"
 import { useAppDispatch } from "@/redux/hook"
 import { Plus } from "lucide-react"
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
+import { toast } from "sonner"
 import type { IBook } from "types"
 
 export function AddBookDialog() {
 
+    const form = useForm();
     const dispatch = useAppDispatch();
 
+    const [addBook, { data, isLoading, isError }] = useAddBookMutation();
+
     const handleAddBook: SubmitHandler<FieldValues> = (data) => {
-        console.log(data);
-        dispatch(addBook(data as IBook));
+        // console.log(data);
+        // dispatch(addBook(data as IBook));
+        addBook(data as IBook)
+            .unwrap()
+            .then((response) => {
+                console.log('Book added successfully:', response);
+                toast.success('Book added successfully!');
+                // dispatch(addBook(data as IBook));
+            })
+            .catch((error) => {
+                console.error('Failed to add book:', error);
+            });
     }
 
-    const form = useForm();
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+
 
     return (
         <Dialog>
@@ -39,7 +57,7 @@ export function AddBookDialog() {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogTitle>Add New Book</DialogTitle>
                 </DialogHeader>
                 <DialogDescription></DialogDescription>
                 <Form {...form}>
@@ -102,9 +120,11 @@ export function AddBookDialog() {
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            <SelectItem value="Fiction">Fiction</SelectItem>
-                                            <SelectItem value="Non-Fiction">Non-Fiction</SelectItem>
-                                            <SelectItem value="Science Fiction">Science Fiction</SelectItem>
+                                            <SelectItem value="FICTION">Fiction</SelectItem>
+                                            <SelectItem value="BIOGRAPHY">Biography</SelectItem>
+                                            <SelectItem value="SCIENCE">Science Fiction</SelectItem>
+                                            <SelectItem value="FANTASY">Fantasy</SelectItem>
+                                            <SelectItem value="HISTORY">History</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </FormItem>

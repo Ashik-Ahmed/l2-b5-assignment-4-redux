@@ -1,5 +1,7 @@
-import { AddBookDialog } from '@/components/module/AddBookDialog/AddBookDialog';
+import { AddBookDialog } from '@/components/module/Book/AddBookDialog';
+import { EditBookDialog } from '@/components/module/Book/EditBookDialog';
 import { useGetBooksQuery } from '@/redux/api/baseApi';
+import { useState } from 'react';
 import type { IBook } from 'types';
 // import { selectBooks } from '@/redux/features/book/bookSlice';
 // import { useAppSelector } from '@/redux/hook';
@@ -8,8 +10,8 @@ import type { IBook } from 'types';
 const Books = () => {
 
     const { data, isLoading, isError } = useGetBooksQuery(undefined);
+    // console.log('Books data:', data, 'Loading:', isLoading, 'Error:', isError);
 
-    console.log('Books data:', data, 'Loading:', isLoading, 'Error:', isError);
 
     // const books = useAppSelector(selectBooks);
     // console.log(books);
@@ -22,7 +24,7 @@ const Books = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {
                     data?.data.map((book: IBook) => (
-                        <div key={book.isbn} className="bg-white shadow-md rounded-xl p-5 border border-gray-100 hover:shadow-lg transition-all duration-200 flex flex-col justify-between">
+                        <div key={book._id} className="bg-white shadow-md rounded-xl p-5 border border-gray-100 hover:shadow-lg transition-all duration-200 flex flex-col justify-between">
                             <div>
 
                                 <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${book.available ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
@@ -48,12 +50,13 @@ const Books = () => {
                             </div>
 
                             <div className="flex justify-end gap-3 mt-auto">
-                                <button
+                                {/* <button
                                     className="px-3 py-1 text-sm rounded-md bg-blue-100 text-blue-700 hover:bg-blue-200 transition"
                                     onClick={() => handleEdit(book)}
                                 >
                                     Edit
-                                </button>
+                                </button> */}
+                                <EditBookDialog book={book} />
                                 <button
                                     className="px-3 py-1 text-sm rounded-md bg-red-100 text-red-700 hover:bg-red-200 transition"
                                     onClick={() => handleDelete(book.isbn)}

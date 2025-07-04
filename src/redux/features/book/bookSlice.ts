@@ -7,62 +7,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-    books: [
-        // {
-        //     title: "The Great Gatsby",
-        //     author: "F. Scott Fitzgerald",
-        //     genre: "Fiction",
-        //     isbn: "978-3-16-148sd0-0",
-        //     description: "The Great Gatsby is a 1925 novel written by American writer F. Scott Fitzgerald.",
-        //     copies: 5,
-        //     available: true
-        // },
-        // {
-        //     title: "The Great Gatsby",
-        //     author: "F. Scott Fitzgerald",
-        //     genre: "Fiction",
-        //     isbn: "978-3-16238410-0",
-        //     description: "The Great Gatsby is a 1925 novel written by American writer F. Scott Fitzgerald.",
-        //     copies: 5,
-        //     available: true
-        // },
-        // {
-        //     title: "The Great Gatsby",
-        //     author: "F. Scott Fitzgerald",
-        //     genre: "Fiction",
-        //     isbn: "978-3-16-148450-0",
-        //     description: "The Great Gatsby is a 1925 novel written by American writer F. Scott Fitzgerald.",
-        //     copies: 5,
-        //     available: true
-        // },
-        // {
-        //     title: "The Great Gatsby",
-        //     author: "F. Scott Fitzgerald",
-        //     genre: "Fiction",
-        //     isbn: "148-3-16-148410-0",
-        //     description: "The Great Gatsby is a 1925 novel written by American writer F. Scott Fitzgerald.",
-        //     copies: 5,
-        //     available: true
-        // },
-        // {
-        //     title: "The Great Gatsby",
-        //     author: "F. Scott Fitzgerald",
-        //     genre: "Fiction",
-        //     isbn: "6l0-3-16-148410-0",
-        //     description: "The Great Gatsby is a 1925 novel written by American writer F. Scott Fitzgerald.",
-        //     copies: 5,
-        //     available: true
-        // },
-        // {
-        //     title: "The Great Gatsby",
-        //     author: "F. Scott Fitzgerald",
-        //     genre: "Fiction",
-        //     isbn: "738-3-16-148410-0",
-        //     description: "The Great Gatsby is a 1925 novel written by American writer F. Scott Fitzgerald.",
-        //     copies: 5,
-        //     available: true
-        // },
-    ],
+    books: [],
 }
 const bookSlice = createSlice({
     name: "book",
@@ -71,6 +16,13 @@ const bookSlice = createSlice({
         addBook: (state, action: PayloadAction<IBook>) => {
             const newBook = action.payload;
             state.books.push(newBook);
+        },
+        editBook: (state, action: PayloadAction<IBook>) => {
+            const updatedBook = action.payload;
+            const index = state.books.findIndex(book => book.isbn === updatedBook.isbn);
+            if (index !== -1) {
+                state.books[index] = updatedBook;
+            }
         }
     }
 })

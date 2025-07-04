@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router'
 import './App.css'
 import Navbar from './components/module/Navbar/Navbar'
+import { Toaster } from './components/ui/sonner'
 
 function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f8f6f1] via-[#f3e9e0] to-[#e9e4f0] flex flex-col font-serif" >
+      <Toaster />
       <Navbar />
       <Outlet />
       {/* Footer */}
