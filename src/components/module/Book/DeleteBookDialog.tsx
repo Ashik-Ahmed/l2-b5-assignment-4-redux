@@ -43,7 +43,7 @@ export function DeleteBookDialog({ book }: { book: IBook }) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className="bg-red-500 text-white hover:bg-red-700 transition-colors duration-200">
+                <Button size={"sm"} className="bg-red-500 text-white hover:bg-red-700 transition-colors duration-200">
                     <Trash />  Delete</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">

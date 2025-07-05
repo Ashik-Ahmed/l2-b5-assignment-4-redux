@@ -72,7 +72,7 @@ export function EditBookDialog({ book }: { book: IBook }) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className="bg-sky-500 text-white hover:bg-sky-700 transition-colors duration-200">
+                <Button size={"sm"} className="bg-sky-500 text-white hover:bg-sky-700 transition-colors duration-200">
                     <Pencil /> Edit</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">

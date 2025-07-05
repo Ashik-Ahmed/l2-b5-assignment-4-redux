@@ -52,7 +52,7 @@ export function BorrowBookDialog({ bookId }: { bookId: string }) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className="bg-[#a67c52] text-white hover:bg-[#6b4f1d] transition-colors duration-200">
+                <Button size={"sm"} className="bg-[#a67c52] text-white hover:bg-[#6b4f1d] transition-colors duration-200">
                     Borrow</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
