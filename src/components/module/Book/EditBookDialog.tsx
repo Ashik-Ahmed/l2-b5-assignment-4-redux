@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -24,7 +23,7 @@ import type { IBook } from "types"
 export function EditBookDialog({ book }: { book: IBook }) {
     const [isOpen, setIsOpen] = useState(false);
 
-    const [editBook, { data, isLoading, isError }] = useEditBookMutation();
+    const [editBook] = useEditBookMutation();
 
     const form = useForm({
         defaultValues: {

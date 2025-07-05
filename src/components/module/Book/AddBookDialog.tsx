@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -26,7 +25,7 @@ export function AddBookDialog() {
     const form = useForm();
     const [isOpen, setIsOpen] = useState(false);
 
-    const [addBook, { data, isLoading, isError }] = useAddBookMutation();
+    const [addBook, { isLoading }] = useAddBookMutation();
 
     const handleAddBook: SubmitHandler<FieldValues> = (data) => {
         // console.log(data);

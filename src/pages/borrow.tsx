@@ -1,6 +1,13 @@
-import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useGetBorrowSummaryQuery } from '@/redux/api/baseApi';
-import React from 'react';
+
+type BorrowSummaryItem = {
+    book: {
+        isbn: string;
+        title: string;
+    };
+    totalQuantity: number;
+};
 
 const Borrow = () => {
 
@@ -19,7 +26,7 @@ const Borrow = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data?.data.map((bookData) => (
+                    {data?.data.map((bookData: BorrowSummaryItem) => (
                         <TableRow key={bookData.book.isbn}>
                             <TableCell className="font-medium">{bookData.book.title}</TableCell>
                             <TableCell className="text-center">{bookData.book.isbn}</TableCell>

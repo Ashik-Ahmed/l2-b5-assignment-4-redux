@@ -23,12 +23,12 @@ import { toast } from "sonner"
 export function BorrowBookDialog({ bookId }: { bookId: string }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-    const [date, setDate] = useState(null);
+    const [date, setDate] = useState<Date | null>(null);
 
     const form = useForm();
     const navigate = useNavigate();
 
-    const [borrowBook, { data, isLoading, isError }] = useBorrowBookMutation();
+    const [borrowBook] = useBorrowBookMutation();
 
     const handleBorrowBook: SubmitHandler<FieldValues> = (data) => {
         const borrowData = { quantity: data.quantity, book: bookId, dueDate: date };

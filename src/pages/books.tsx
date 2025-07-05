@@ -1,11 +1,7 @@
 import { AddBookDialog } from '@/components/module/Book/AddBookDialog';
-import { BorrowBookDialog } from '@/components/module/Book/BorrowBookDialog';
-import { DeleteBookDialog } from '@/components/module/Book/DeleteBookDialog';
-import { EditBookDialog } from '@/components/module/Book/EditBookDialog';
 import { columns } from '@/components/module/DataTable/Columns';
 import { DataTable } from '@/components/module/DataTable/DataTable';
 import { useGetBooksQuery } from '@/redux/api/baseApi';
-import type { IBook } from 'types';
 // import { selectBooks } from '@/redux/features/book/bookSlice';
 // import { useAppSelector } from '@/redux/hook';
 
