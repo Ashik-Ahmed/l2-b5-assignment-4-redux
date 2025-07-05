@@ -1,4 +1,5 @@
 import { AddBookDialog } from '@/components/module/Book/AddBookDialog';
+import { BorrowBookDialog } from '@/components/module/Book/BorrowBookDialog';
 import { DeleteBookDialog } from '@/components/module/Book/DeleteBookDialog';
 import { EditBookDialog } from '@/components/module/Book/EditBookDialog';
 import { useGetBooksQuery } from '@/redux/api/baseApi';
@@ -10,7 +11,7 @@ import type { IBook } from 'types';
 const Books = () => {
 
     const { data, isLoading, isError } = useGetBooksQuery(undefined);
-    console.log('Books data:', data, 'Loading:', isLoading, 'Error:', isError);
+    // console.log('Books data:', data, 'Loading:', isLoading, 'Error:', isError);
 
 
     // const books = useAppSelector(selectBooks);
@@ -53,6 +54,8 @@ const Books = () => {
                             </div>
 
                             <div className="flex justify-end gap-3 mt-auto">
+
+                                <BorrowBookDialog bookId={book?._id} />
                                 {/* <button
                                     className="px-3 py-1 text-sm rounded-md bg-blue-100 text-blue-700 hover:bg-blue-200 transition"
                                     onClick={() => handleEdit(book)}

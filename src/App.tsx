@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f8f6f1] via-[#f3e9e0] to-[#e9e4f0] flex flex-col font-serif" >
-      <Toaster />
+      <Toaster richColors position="top-right" />
       <Navbar />
       <Outlet />
       {/* Footer */}
