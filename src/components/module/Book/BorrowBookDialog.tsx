@@ -17,6 +17,7 @@ import { useBorrowBookMutation } from "@/redux/api/baseApi"
 import { ChevronDownIcon } from "lucide-react"
 import { useState } from "react"
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
+import { useNavigate } from "react-router"
 import { toast } from "sonner"
 
 export function BorrowBookDialog({ bookId }: { bookId: string }) {
@@ -25,6 +26,7 @@ export function BorrowBookDialog({ bookId }: { bookId: string }) {
     const [date, setDate] = useState(null);
 
     const form = useForm();
+    const navigate = useNavigate();
 
     const [borrowBook, { data, isLoading, isError }] = useBorrowBookMutation();
 
@@ -40,6 +42,7 @@ export function BorrowBookDialog({ bookId }: { bookId: string }) {
                     // console.log('Book borrowed successfully:', response);
                     toast.success('Book borrowed successfully!');
                     form.reset();
+                    navigate("/borrow");
                 }
             })
             .catch((error) => {

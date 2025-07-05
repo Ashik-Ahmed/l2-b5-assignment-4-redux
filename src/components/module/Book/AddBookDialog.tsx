@@ -151,6 +151,26 @@ export function AddBookDialog() {
                                 </FormItem>
                             )}
                         />
+                        {/* <FormField
+                            control={form.control}
+                            name="available"
+                            render={({ field }) => (
+                                <FormItem className="w-full mt-2">
+                                    <FormLabel>Availability</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl className="w-full">
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a genre" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="true">Available</SelectItem>
+                                            <SelectItem value="false">Unavailable</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </FormItem>
+                            )}
+                        /> */}
                         <FormField
                             control={form.control}
                             name="description"

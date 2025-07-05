@@ -31,7 +31,7 @@ export const columns: ColumnDef<IBook>[] = [
     // },
     {
         accessorKey: "available",
-        header: "Available",
+        header: "Availability",
         cell: ({ row }) => {
             return <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${row.original.available ? 'bg-green-300 text-green-900' : 'bg-red-300 text-red-700'}`}>
                 {row.original.available ? 'Available' : 'Unavailable'}
