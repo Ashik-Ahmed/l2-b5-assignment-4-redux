@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+import heroImage from "../assets/booknestHero.jpg"
 
 const Homepage = () => {
     return (
@@ -11,7 +13,7 @@ const Homepage = () => {
                 <div className="flex flex-col md:flex-row items-center gap-12 w-full max-w-6xl mx-auto">
                     {/* Illustration */}
                     <div className="flex-1 flex justify-center">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Bookshelf" className="w-72 md:w-96 drop-shadow-xl rounded-2xl border-4 border-[#f3e9e0] bg-white bg-opacity-80" />
+                        <img src={heroImage} alt="Bookshelf" className="drop-shadow-xl rounded-2xl border-4 border-[#f3e9e0] bg-white bg-opacity-80" />
                     </div>
                     {/* Hero Content */}
                     <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
@@ -19,8 +21,8 @@ const Homepage = () => {
                         <h2 className="text-2xl md:text-3xl text-[#a67c52] font-semibold mb-6 font-serif">Your Digital Library Sanctuary</h2>
                         <p className="text-lg md:text-xl text-[#5a4a3f] mb-8 max-w-xl font-sans">Effortlessly manage your library’s collection, add new books, and track borrowing activity in a beautiful, intuitive environment inspired by the world’s best book platforms.</p>
                         <div className="flex gap-6 mt-2">
-                            <a href="#books" className="bg-[#a67c52] hover:bg-[#6b4f1d] text-white px-8 py-3 rounded-full font-bold shadow-lg text-lg transition-colors">Browse Books</a>
-                            <a href="#add-book" className="bg-white border-2 border-[#a67c52] text-[#a67c52] hover:bg-[#f7e7ce] px-8 py-3 rounded-full font-bold shadow text-lg transition-colors">Add Book</a>
+                            <Link to="/books" className="bg-[#a67c52] hover:bg-[#6b4f1d] text-white px-8 py-3 rounded-full font-bold shadow-lg text-lg transition-colors">Browse Books</Link>
+                            <Link to="/books" className="bg-white border-2 border-[#a67c52] text-[#a67c52] hover:bg-[#f7e7ce] px-8 py-3 rounded-full font-bold shadow text-lg transition-colors">Add Book</Link>
                         </div>
                     </div>
                 </div>
@@ -100,7 +102,7 @@ const Homepage = () => {
                     </div>
                     {/* Discover More Button */}
                     <div className="flex justify-center mt-12">
-                        <button className="bg-black text-white px-10 py-4 rounded shadow-lg font-semibold text-lg tracking-wide hover:bg-[#a67c52] hover:text-white transition-colors">DISCOVER MORE BOOKS</button>
+                        <Link to="/books" className="bg-black text-white px-10 py-4 rounded shadow-lg font-semibold text-lg tracking-wide hover:bg-[#a67c52] hover:text-white transition-colors">DISCOVER MORE BOOKS</Link>
                     </div>
                 </section>
 
