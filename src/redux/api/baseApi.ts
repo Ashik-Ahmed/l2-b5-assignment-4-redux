@@ -35,7 +35,7 @@ export const baseApi = createApi({
                 url: `/books/${bookId}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: ['Book'],
+            invalidatesTags: ['Book', 'Borrow'],
         }),
 
 

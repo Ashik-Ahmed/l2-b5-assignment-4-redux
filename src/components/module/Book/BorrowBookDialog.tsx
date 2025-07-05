@@ -19,8 +19,9 @@ import { useState } from "react"
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { toast } from "sonner"
+import type { IBook } from "types"
 
-export function BorrowBookDialog({ bookId }: { bookId: string }) {
+export function BorrowBookDialog({ book }: { book: IBook }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const [date, setDate] = useState<Date | null>(null);
@@ -31,8 +32,13 @@ export function BorrowBookDialog({ bookId }: { bookId: string }) {
     const [borrowBook] = useBorrowBookMutation();
 
     const handleBorrowBook: SubmitHandler<FieldValues> = (data) => {
-        const borrowData = { quantity: data.quantity, book: bookId, dueDate: date };
+        const borrowData = { quantity: data.quantity, book: book._id, dueDate: date };
         // console.log(borrowData);
+        if (!date) {
+            // Show error toast or set error in form
+            toast.error("Please select a due date.");
+            return;
+        }
 
         borrowBook(borrowData)
             .unwrap()
@@ -55,7 +61,7 @@ export function BorrowBookDialog({ bookId }: { bookId: string }) {
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button size={"sm"} className="bg-[#a67c52] text-white hover:bg-[#6b4f1d] transition-colors duration-200">
+                <Button size={"sm"} disabled={book.copies === 0} className="bg-[#a67c52] text-white hover:bg-[#6b4f1d] transition-colors duration-200">
                     Borrow</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
@@ -95,7 +101,7 @@ export function BorrowBookDialog({ bookId }: { bookId: string }) {
                                         <ChevronDownIcon />
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+                                <PopoverContent className="w-auto overflow-hidden p-0" align="start" >
                                     <Calendar
                                         required
                                         mode="single"
@@ -114,7 +120,6 @@ export function BorrowBookDialog({ bookId }: { bookId: string }) {
                         <DialogFooter className="mt-4">
                             <Button type="submit" className="bg-[#a67c52] text-white hover:bg-[#8f6b4a] transition-colors duration-200">Borrow</Button>
                         </DialogFooter>
-
                     </form>
                 </Form>
             </DialogContent>

@@ -76,7 +76,7 @@ export function AddBookDialog() {
                                     <FormControl>
                                         <div className="grid w-full max-w-sm items-center gap-3">
                                             <Label htmlFor="copies">Title</Label>
-                                            <Input {...field} value={field.value || ""} />
+                                            <Input {...field} value={field.value || ""} required />
                                         </div>
                                     </FormControl>
                                 </FormItem>
@@ -91,7 +91,7 @@ export function AddBookDialog() {
                                     <FormControl>
                                         <div className="grid w-full max-w-sm items-center gap-3">
                                             <Label htmlFor="copies">Author</Label>
-                                            <Input {...field} value={field.value || ""} />
+                                            <Input {...field} value={field.value || ""} required />
                                         </div>
                                     </FormControl>
                                 </FormItem>
@@ -103,7 +103,7 @@ export function AddBookDialog() {
                             render={({ field }) => (
                                 <FormItem className="w-full mt-2">
                                     <FormLabel>Genre</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value} required>
                                         <FormControl className="w-full">
                                             <SelectTrigger>
                                                 <SelectValue placeholder="Select a genre" />
@@ -129,7 +129,7 @@ export function AddBookDialog() {
                                     <FormControl>
                                         <div className="grid w-full max-w-sm items-center gap-3">
                                             <Label htmlFor="copies">ISBN</Label>
-                                            <Input {...field} value={field.value || ""} />
+                                            <Input {...field} value={field.value || ""} required />
                                         </div>
                                     </FormControl>
                                 </FormItem>
@@ -144,32 +144,12 @@ export function AddBookDialog() {
                                     <FormControl>
                                         <div className="grid w-full max-w-sm items-center gap-3">
                                             <Label htmlFor="copies">Copies</Label>
-                                            <Input {...field} value={field.value || ""} />
+                                            <Input {...field} value={field.value || ""} required type="number" />
                                         </div>
                                     </FormControl>
                                 </FormItem>
                             )}
                         />
-                        {/* <FormField
-                            control={form.control}
-                            name="available"
-                            render={({ field }) => (
-                                <FormItem className="w-full mt-2">
-                                    <FormLabel>Availability</FormLabel>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                        <FormControl className="w-full">
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select a genre" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            <SelectItem value="true">Available</SelectItem>
-                                            <SelectItem value="false">Unavailable</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </FormItem>
-                            )}
-                        /> */}
                         <FormField
                             control={form.control}
                             name="description"

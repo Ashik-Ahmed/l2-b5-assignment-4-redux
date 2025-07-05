@@ -44,7 +44,7 @@ export const columns: ColumnDef<IBook>[] = [
         cell: ({ row }) => {
             return <div className="flex justify-end gap-3 mt-auto">
 
-                <BorrowBookDialog bookId={row.original._id} />
+                <BorrowBookDialog book={row.original} />
                 <EditBookDialog book={row.original} />
                 <DeleteBookDialog book={row.original} />
             </div>
