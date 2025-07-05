@@ -1,7 +1,29 @@
 import { Link } from "react-router";
 import heroImage from "../assets/booknestHero.webp"
+import { useGetBooksQuery } from "@/redux/api/baseApi";
+import type { IBook } from "types";
+import { useEffect, useState } from "react";
 
 const Homepage = () => {
+
+    const { data } = useGetBooksQuery(undefined);
+
+    const [books, setBooks] = useState<IBook[]>([]);
+    const [selectedGenre, setSelectedGenre] = useState<string | undefined>("All");
+
+    console.log(data);
+
+    useEffect(() => {
+        if (selectedGenre === "All") {
+            setBooks(data?.data || []);
+        } else {
+            const filteredBooks = data?.data?.filter((book: IBook) => book.genre === selectedGenre);
+            setBooks(filteredBooks || []);
+        }
+    }, [data, selectedGenre]);
+
+    const genres = ["All", "FICTION", "BIOGRAPHY", "SCIENCE", "FANTASY", "HISTORY"];
+
     return (
         <div>
             {/* Hero Section */}
@@ -32,15 +54,34 @@ const Homepage = () => {
                     <div className="w-24 h-1 bg-[#a67c52] mx-auto mb-8 rounded-full opacity-30" />
                     {/* Tabs */}
                     <div className="flex justify-center gap-8 mb-10 text-lg font-medium">
-                        <button className="text-[#c0392b] border-b-2 border-[#c0392b] pb-1 px-2 focus:outline-none">NEW RELEASES</button>
-                        <button className="text-gray-500 hover:text-[#a67c52] transition-colors pb-1 px-2">BEST SELLERS</button>
-                        <button className="text-gray-500 hover:text-[#a67c52] transition-colors pb-1 px-2">AWARD WINNERS</button>
-                        <button className="text-gray-500 hover:text-[#a67c52] transition-colors pb-1 px-2">COMING SOON</button>
+                        {
+                            genres.map((genre) => {
+                                return (
+                                    <button key={genre} onClick={() => setSelectedGenre(genre)} className={`${selectedGenre === genre ? "border-b-2 border-[#c0392b]" : ""}text-[#c0392b]  pb-1 px-2 focus:outline-none`}>{genre}</button>
+                                )
+                            })
+                        }
                     </div>
                     {/* Book Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 justify-center items-end">
-                        {/* Book 1 */}
-                        <div className="flex flex-col items-center">
+
+                        {
+                            books?.slice(0, 6)?.map((book: IBook) => {
+                                return (
+                                    <div className="flex flex-col items-center">
+                                        <img src={book.cover} alt={book.title} className="w-44 h-64 object-cover rounded shadow-lg mb-4" />
+                                        <div className="text-lg font-semibold text-center">{book.title}</div>
+                                        <div className="text-[#c0392b] text-sm mb-1">{book.author}</div>
+                                        <div className="flex justify-center mb-1">
+                                            <span className="text-yellow-400">★★★★★</span>
+                                        </div>
+                                        <div className="text-[#c0392b] font-bold">Available: {book.copies}</div>
+                                    </div>
+                                )
+                            })
+                        }
+
+                        {/* <div className="flex flex-col items-center">
                             <img src="https://covers.openlibrary.org/b/id/10523338-L.jpg" alt="A Doctor in the House" className="w-44 h-64 object-cover rounded shadow-lg mb-4" />
                             <div className="text-lg font-semibold text-center">A Doctor in the House</div>
                             <div className="text-[#c0392b] text-sm mb-1">Candy Carson</div>
@@ -49,7 +90,7 @@ const Homepage = () => {
                             </div>
                             <div className="text-[#c0392b] font-bold">$6.50 – $16.99</div>
                         </div>
-                        {/* Book 2 */}
+                      
                         <div className="flex flex-col items-center">
                             <img src="https://covers.openlibrary.org/b/id/11153223-L.jpg" alt="Design of the 20th Century" className="w-44 h-64 object-cover rounded shadow-lg mb-4" />
                             <div className="text-lg font-semibold text-center">Design of the 20th Century</div>
@@ -59,7 +100,7 @@ const Homepage = () => {
                             </div>
                             <div className="text-[#c0392b] font-bold">$10.99 – $20.00</div>
                         </div>
-                        {/* Book 3 */}
+                     
                         <div className="flex flex-col items-center">
                             <img src="https://covers.openlibrary.org/b/id/10958309-L.jpg" alt="New Galaxy" className="w-44 h-64 object-cover rounded shadow-lg mb-4" />
                             <div className="text-lg font-semibold text-center">New Galaxy</div>
@@ -69,7 +110,7 @@ const Homepage = () => {
                             </div>
                             <div className="text-[#c0392b] font-bold">$7.90 – $16.90</div>
                         </div>
-                        {/* Book 4 */}
+                      
                         <div className="flex flex-col items-center">
                             <img src="https://covers.openlibrary.org/b/id/10523339-L.jpg" alt="The Long Road to the Deep Silence" className="w-44 h-64 object-cover rounded shadow-lg mb-4" />
                             <div className="text-lg font-semibold text-center">The Long Road to the Deep Silence</div>
@@ -79,7 +120,7 @@ const Homepage = () => {
                             </div>
                             <div className="text-[#c0392b] font-bold">$12.00 – $22.00</div>
                         </div>
-                        {/* Book 5 */}
+                       
                         <div className="flex flex-col items-center">
                             <img src="https://covers.openlibrary.org/b/id/10958310-L.jpg" alt="Life in the Garden" className="w-44 h-64 object-cover rounded shadow-lg mb-4" />
                             <div className="text-lg font-semibold text-center">Life in the Garden</div>
@@ -89,7 +130,7 @@ const Homepage = () => {
                             </div>
                             <div className="text-[#c0392b] font-bold">$11.99 – $25.00</div>
                         </div>
-                        {/* Book 6 */}
+
                         <div className="flex flex-col items-center">
                             <img src="https://covers.openlibrary.org/b/id/10958311-L.jpg" alt="It's a Really Strange Story" className="w-44 h-64 object-cover rounded shadow-lg mb-4" />
                             <div className="text-lg font-semibold text-center">It's a Really Strange Story</div>
@@ -98,7 +139,7 @@ const Homepage = () => {
                                 <span className="text-yellow-400">★★★★★</span>
                             </div>
                             <div className="text-[#c0392b] font-bold">$8.00 – $18.00</div>
-                        </div>
+                        </div> */}
                     </div>
                     {/* Discover More Button */}
                     <div className="flex justify-center mt-12">

@@ -7,4 +7,5 @@ export interface IBook {
     description: string;
     copies: number;
     available: boolean;
+    cover: string;
 }

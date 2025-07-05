@@ -13,7 +13,7 @@ const Books = () => {
 
     // Pass genre as an argument to the query
     const { data, isLoading, isError } = useGetBooksQuery((selectedGenre && selectedGenre !== 'All') ? { genre: selectedGenre } : undefined);
-
+    console.log(data);
     if (isLoading) return <div className='text-4xl text-[#6b4f1d] w-full mt-10 flex justify-center items-center'>Loading Books...</div>;
     if (isError) return <div>Error</div>;
 

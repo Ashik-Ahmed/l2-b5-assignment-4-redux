@@ -17,7 +17,6 @@ export const baseApi = createApi({
             query: (params) => {
                 let url = "/books";
                 if (params?.genre) url += `?filter=${params.genre}`;
-                console.log(url);
                 return url;
             },
             providesTags: ['Book']
