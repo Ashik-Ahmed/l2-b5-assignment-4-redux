@@ -5,7 +5,7 @@ A modern, full-stack library management web application built with React, Redux 
 ## Features
 
 - 📚 View, add, edit, and delete books
-- 🔍 Search and filter books
+- 🔍 filter books
 - 📝 Borrow books and track borrow records
 - 🛠️ Built with React, Redux Toolkit, TypeScript, and Vite
 - 🎨 Modern UI with custom components
@@ -79,11 +79,3 @@ A modern, full-stack library management web application built with React, Redux 
 
 - Easily deployable to Vercel, Netlify, or any static hosting provider.
 - Ensure your backend API supports CORS for your frontend domain.
-
-## License
-
-This project is licensed under the MIT License.
-
----
-
-**Made with ❤️ for educational purposes.**

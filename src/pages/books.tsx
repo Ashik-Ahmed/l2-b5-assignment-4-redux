@@ -1,29 +1,45 @@
 import { AddBookDialog } from '@/components/module/Book/AddBookDialog';
 import { columns } from '@/components/module/DataTable/Columns';
 import { DataTable } from '@/components/module/DataTable/DataTable';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useGetBooksQuery } from '@/redux/api/baseApi';
+import { useState } from 'react';
 // import { selectBooks } from '@/redux/features/book/bookSlice';
 // import { useAppSelector } from '@/redux/hook';
 
 
 const Books = () => {
+    const [selectedGenre, setSelectedGenre] = useState<string | undefined>(undefined);
 
-    const { data, isLoading, isError } = useGetBooksQuery(undefined);
-    // console.log('Books data:', data, 'Loading:', isLoading, 'Error:', isError);
-
-
-    // const books = useAppSelector(selectBooks);
-    // console.log(books);
+    // Pass genre as an argument to the query
+    const { data, isLoading, isError } = useGetBooksQuery((selectedGenre && selectedGenre !== 'All') ? { genre: selectedGenre } : undefined);
 
     if (isLoading) return <div className='text-4xl text-[#6b4f1d] w-full mt-10 flex justify-center items-center'>Loading Books...</div>;
     if (isError) return <div>Error</div>;
 
     return (
         <div className='m-4'>
-            <div className='flex justify-end items-center mb-2'>
+            <div className='flex justify-end items-center mb-2 gap-2'>
                 <AddBookDialog />
+                <Select onValueChange={(value) => setSelectedGenre(value)}>
+                    <SelectTrigger className="w-[180px] select-trigger-white bg-[#a67c52] hover:bg-[#8f6b4a] transition-colors duration-200">
+                        <SelectValue placeholder="Select Genre" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectLabel>Select Genre to Filter</SelectLabel>
+                            <SelectItem value="All">All</SelectItem>
+                            <SelectItem value="FICTION">Fiction</SelectItem>
+                            <SelectItem value="BIOGRAPHY">Biography</SelectItem>
+                            <SelectItem value="SCIENCE">Science</SelectItem>
+                            <SelectItem value="FANTASY">Fantasy</SelectItem>
+                            <SelectItem value="HISTORY">History</SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
             </div>
             <div>
+                <DataTable columns={columns} data={data?.data} />
                 {/* {
                     data?.data.map((book: IBook) => (
                         <div key={book._id} className="bg-white shadow-md rounded-xl p-5 border border-gray-100 hover:shadow-lg transition-all duration-200 flex flex-col justify-between">
@@ -60,7 +76,6 @@ const Books = () => {
                         </div>
                     ))
                 } */}
-                <DataTable columns={columns} data={data?.data} />
             </div>
 
 

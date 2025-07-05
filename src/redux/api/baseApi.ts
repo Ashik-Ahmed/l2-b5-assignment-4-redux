@@ -14,7 +14,12 @@ export const baseApi = createApi({
             invalidatesTags: ['Book'],
         }),
         getBooks: builder.query({
-            query: () => "/books",
+            query: (params) => {
+                let url = "/books";
+                if (params?.genre) url += `?filter=${params.genre}`;
+                console.log(url);
+                return url;
+            },
             providesTags: ['Book']
         }),
         editBook: builder.mutation({

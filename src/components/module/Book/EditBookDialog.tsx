@@ -126,7 +126,7 @@ export function EditBookDialog({ book }: { book: IBook }) {
                                         <SelectContent>
                                             <SelectItem value="FICTION">Fiction</SelectItem>
                                             <SelectItem value="BIOGRAPHY">Biography</SelectItem>
-                                            <SelectItem value="SCIENCE">Science Fiction</SelectItem>
+                                            <SelectItem value="SCIENCE">Science</SelectItem>
                                             <SelectItem value="FANTASY">Fantasy</SelectItem>
                                             <SelectItem value="HISTORY">History</SelectItem>
                                         </SelectContent>

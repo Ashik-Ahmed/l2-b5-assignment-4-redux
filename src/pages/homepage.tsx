@@ -160,7 +160,7 @@ const Homepage = () => {
                     <div className="bg-[#a67c52] rounded-2xl shadow-xl p-10 flex flex-col items-center text-center">
                         <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Ready to Transform Your Library?</h2>
                         <p className="text-white text-lg mb-6">Join BookNest today and experience the next generation of library management.</p>
-                        <a href="#add-book" className="bg-white text-[#a67c52] font-bold px-8 py-4 rounded-full shadow-lg text-lg hover:bg-[#f7e7ce] transition-colors">Get Started Now</a>
+                        <Link to="/books" className="bg-white text-[#a67c52] font-bold px-8 py-4 rounded-full shadow-lg text-lg hover:bg-[#f7e7ce] transition-colors">Get Started Now</Link>
                     </div>
                 </section>
             </main>

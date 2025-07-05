@@ -114,7 +114,19 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+[data-placeholder] {
+  color: #ffffff !important;
+  /* amber-400 */
+  opacity: 1 !important;
+}
+
+.select-trigger-white svg {
+  color: #fff !important;
+  fill: #fff !important;
 }
