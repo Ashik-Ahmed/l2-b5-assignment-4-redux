@@ -10,7 +10,7 @@ import type { IBook } from 'types';
 const Books = () => {
 
     const { data, isLoading, isError } = useGetBooksQuery(undefined);
-    // console.log('Books data:', data, 'Loading:', isLoading, 'Error:', isError);
+    console.log('Books data:', data, 'Loading:', isLoading, 'Error:', isError);
 
 
     // const books = useAppSelector(selectBooks);

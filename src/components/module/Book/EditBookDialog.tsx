@@ -77,7 +77,7 @@ export function EditBookDialog({ book }: { book: IBook }) {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Edit Book</DialogTitle>
+                    <DialogTitle className="text-[#6b4f1d]">Edit Book</DialogTitle>
                 </DialogHeader>
                 <DialogDescription></DialogDescription>
                 <Form {...form}>
@@ -181,10 +181,10 @@ export function EditBookDialog({ book }: { book: IBook }) {
                             )}
                         />
                         <DialogFooter className="mt-4">
-                            <DialogClose asChild>
+                            {/* <DialogClose asChild>
                                 <Button variant="outline">Cancel</Button>
-                            </DialogClose>
-                            <Button type="submit">Save changes</Button>
+                            </DialogClose> */}
+                            <Button type="submit" className="bg-[#a67c52] text-white hover:bg-[#8f6b4a] transition-colors duration-200">Save changes</Button>
                         </DialogFooter>
 
                     </form>

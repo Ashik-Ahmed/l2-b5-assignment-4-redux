@@ -31,7 +31,7 @@ export const baseApi = createApi({
                 method: 'DELETE',
             }),
             invalidatesTags: ['Book'],
-        })
+        }),
     })
 })
 

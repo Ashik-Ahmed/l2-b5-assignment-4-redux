@@ -63,7 +63,7 @@ export function AddBookDialog() {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Add New Book</DialogTitle>
+                    <DialogTitle className="text-[#6b4f1d]">Add New Book</DialogTitle>
                 </DialogHeader>
                 <DialogDescription></DialogDescription>
                 <Form {...form}>
@@ -98,21 +98,6 @@ export function AddBookDialog() {
                                 </FormItem>
                             )}
                         />
-                        {/* <FormField
-                            control={form.control}
-                            name="genre"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel />
-                                    <FormControl>
-                                        <div className="grid w-full max-w-sm items-center gap-3">
-                                            <Label htmlFor="copies">Genre</Label>
-                                            <Input {...field} value={field.value || ""} />
-                                        </div>
-                                    </FormControl>
-                                </FormItem>
-                            )}
-                        /> */}
                         <FormField
                             control={form.control}
                             name="genre"
@@ -182,10 +167,10 @@ export function AddBookDialog() {
                             )}
                         />
                         <DialogFooter className="mt-4">
-                            <DialogClose asChild>
+                            {/* <DialogClose asChild>
                                 <Button variant="outline">Cancel</Button>
-                            </DialogClose>
-                            <Button type="submit">Save changes</Button>
+                            </DialogClose> */}
+                            <Button type="submit" className="bg-[#a67c52] text-white hover:bg-[#8f6b4a] transition-colors duration-200">Submit</Button>
                         </DialogFooter>
 
                     </form>
