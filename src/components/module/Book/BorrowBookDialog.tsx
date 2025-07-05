@@ -34,6 +34,11 @@ export function BorrowBookDialog({ book }: { book: IBook }) {
     const handleBorrowBook: SubmitHandler<FieldValues> = (data) => {
         const borrowData = { quantity: data.quantity, book: book._id, dueDate: date };
         // console.log(borrowData);
+        if (data.quantity > book.copies) {
+            toast.error("Not enough copies available");
+            return;
+        }
+
         if (!date) {
             // Show error toast or set error in form
             toast.error("Please select a due date.");
